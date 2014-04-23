@@ -1,6 +1,6 @@
 {
   "name": "node-normalizer",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Normalize and clean text",
   "main": "index.js",
   "scripts": {

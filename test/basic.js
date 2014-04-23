@@ -14,7 +14,7 @@ describe('Normalizer', function(){
 	describe('Should clean input', function() {
 
 		it("should replace subsitutes", function() {
-			norm.clean("Nov 1st I weighed 90 kgs.").should.eql("November 1st I weighed 90 kilograms");
+			norm.clean("Nov 1st I weighed 90 kgs. total").should.eql("November 1st I weighed 90 kilograms total");
 			norm.clean("I shared it on FB w/ friends, ie: you").should.eql("I shared it on Facebook with friends, for example : you");
 		});
 
@@ -44,7 +44,11 @@ describe('Normalizer', function(){
 		});
 
 		it("should remove extra spaces", function() {
-			norm.clean("this    is     spaced 		out!").should.eql("this is spaced out!");
+			norm.clean("this    is     spaced 		out").should.eql("this is spaced out");
+		});
+
+		it("should remove punct", function() {
+			norm.clean("why do i care?").should.eql("why do I care");
 		});
 
 	});

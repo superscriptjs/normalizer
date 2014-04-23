@@ -1,0 +1,20 @@
+{
+  "name": "normalizer",
+  "version": "0.0.1",
+  "description": "Normalize and clean text",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha test/basic.js -R spec"
+  },
+  "author": "Rob Ellis",
+  "license": "MIT",
+  "dependencies": {
+    "string": "~1.8.0",
+    "debug": "~0.8.0",
+    "async": "~0.7.0"
+  },
+  "devDependencies": {
+    "mocha": "~1.18.2",
+    "should": "~3.3.1"
+  }
+}

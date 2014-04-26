@@ -101,6 +101,7 @@
  it'll it+will
  it'sn't it+is+not
  it_'s it+is
+ it's it+is
  let's let+us
  let_'s let+us
  li'l little

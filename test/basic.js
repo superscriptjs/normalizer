@@ -22,6 +22,7 @@ describe('Normalizer', function(){
 			norm.clean("I'm on the yelow zebra").should.eql("I am on the yellow zebra");
 			norm.clean("I'll listen to y'all").should.eql("I will listen to you all");
 			norm.clean("do n't make it right").should.eql("do not make it right");
+			norm.clean("it's all good").should.eql("it is all good");
 		});
 
 		it("should swap british / canadian words", function() {

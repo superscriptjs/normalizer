@@ -52,5 +52,10 @@ describe('Normalizer', function(){
 			norm.clean("why do i care?").should.eql("why do I care");
 		});
 
+		it("Fix numbers", function() {
+			norm.clean("how much is 1,000.00").should.eql("how much is 1000.00");
+		});
+		
+
 	});
 });

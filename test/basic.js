@@ -40,6 +40,10 @@ describe('Normalizer', function(){
 			norm.clean(":)").should.eql("~emohappy");
 		});
 
+		it("should clean this", function() {
+			norm.clean("Well , I could not help it, could I").should.eql("I could not help it, could I")
+		});
+
 		it("should not remove +", function() {
 			norm.clean("3+4=7").should.eql("3+4=7");
 		});

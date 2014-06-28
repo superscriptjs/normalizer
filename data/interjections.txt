@@ -60,6 +60,7 @@
  <blah_blah_blah ~emobored
  <bleah ~emodisgust
  <bollocks ~no
+ <Bonjour> ~emohello
  <boo-yah ~emohappy
  <boo ~emodisgust
  <bore ~emobored
@@ -707,6 +708,7 @@
  <yuk> ~emodisgust
  <yup ~yes
  <yuppers ~yes
+ <y why
  a_minute_ago_you_said ~emoprotest
  also> ~emomutual
  <bring_it_on> ~yes

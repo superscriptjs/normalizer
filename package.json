@@ -4,7 +4,7 @@
   "description": "Normalize and clean text",
   "main": "index.js",
   "scripts": {
-    "test": "mocha test/basic.js -R spec"
+    "test": "mocha test/basic.js -R spec -t 4000"
   },
   "author": "Rob Ellis",
   "license": "MIT",

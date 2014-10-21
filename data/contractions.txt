@@ -166,6 +166,7 @@
  what'll what+will
  what're what+are
  what've what+have
+ what's what+is
  what_'s what+is
  when_'s when+is
  where'd where+did

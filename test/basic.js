@@ -60,5 +60,13 @@ describe('Normalizer', function(){
 			norm.clean("how much is 1,000.00").should.eql("how much is 1000.00");
 		});
 		
+		it("Fix ASCII characters", function() {
+			norm.clean("What’s up").should.eql("what is up");
+			norm.clean("What's up").should.eql("what is up");
+			norm.clean("I said “shut up”").should.eql('I said "shut up"');
+			norm.clean("œ").should.eql('');
+		});
+
+
 	});
 });

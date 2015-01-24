@@ -2142,6 +2142,7 @@ itinirary itinerary
 itinirarys itineraries
 ititial initial
 itnerests interests 
+iz is
 jagid jagged
 jagwar jaguar
 jalusey jalousie 
@@ -4591,6 +4592,7 @@ worstened worsened
 worstening worsening
 worth_while worthwhile
 worthwile worthwhile
+wot what
 woud would
 woudl would
 wressel wrestle

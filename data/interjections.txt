@@ -666,6 +666,7 @@
  <yawn ~emobored
  <yay ~yes
  <yea ~yes
+ <ya ~yes
  <yeah ~yes
  <yeah_definitely ~yes
  <yeah_sure ~yes

@@ -92,6 +92,8 @@
  I'll I+will
  i'm I+am
  I'm I+am
+ im I+am
+ Im I+am
  i've I+have
  I've I+have
  in't is+it+not

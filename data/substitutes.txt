@@ -1259,7 +1259,6 @@ prof. professor
  raelly really
  rather_then rather+than
  real_actual actual
- really
  receded_back receded
  recently_new new
  rectangular_in_shape rectangular

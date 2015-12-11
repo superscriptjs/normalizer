@@ -1,6 +1,6 @@
 # Normalize, clean and fix text
 
-    npm install node-normalize
+    npm install node-normalizer
 
 The simple app processes input and tries to make it consumable for a bot.
 

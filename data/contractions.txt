@@ -145,10 +145,12 @@
  that'll that+will
  that'll_'ve that+will+have
  that_'s that+is
+ that's that+is
  there'd there+'d
  there'll there+will
  there're there+are
  there_'s there+is
+ there's there+is
  they'd they+'d
  they'll they+will
  they're they+are

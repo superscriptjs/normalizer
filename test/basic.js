@@ -60,6 +60,11 @@ describe('Normalizer', function(){
       norm.clean("how much is 1,000.00").should.eql("how much is 1000.00");
     });
     
+    it("Spell Fix 2 word combo", function() {
+      norm.clean("hwo do you").should.eql("how do you");
+      norm.clean("hwo is you").should.eql("who is you");
+    });
+
     it("Fix ASCII characters", function() {
       norm.clean("What’s up").should.eql("what is up");
       norm.clean("What's up").should.eql("what is up");

@@ -1,15 +1,21 @@
-  
 var mocha   = require("mocha");
 var should  = require("should");
 var norm = require("../index");
 
 describe('Normalizer', function(){
+  var startTime;
 
   before(function(done){
     norm.loadData(function(){
+      startTime = new Date();
       done();
     });
   });
+
+  after(function(done) {
+    console.log('Test duration: ' + (new Date() - startTime) + 'ms');
+    done();
+  })
 
   describe('Should clean input', function() {
 
@@ -59,7 +65,7 @@ describe('Normalizer', function(){
     it("Fix numbers", function() {
       norm.clean("how much is 1,000.00").should.eql("how much is 1000.00");
     });
-    
+
     it("Spell Fix 2 word combo", function() {
       norm.clean("hwo do you").should.eql("how do you");
       norm.clean("hwo is you").should.eql("who is you");
@@ -71,7 +77,5 @@ describe('Normalizer', function(){
       norm.clean("I said “shut up”").should.eql('I said "shut up"');
       norm.clean("œ").should.eql('');
     });
-
-
   });
 });

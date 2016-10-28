@@ -1,8 +1,8 @@
 {
   "name": "node-normalizer",
-  "version": "1.0.0-alpha1",
+  "version": "1.0.0-alpha3",
   "description": "Normalize and clean text",
-  "main": "lib/index.js",
+  "main": "lib/normalizer.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/superscriptjs/normalizer"

@@ -1,21 +1,37 @@
 {
   "name": "node-normalizer",
-  "version": "0.2.0",
+  "version": "1.0.0-alpha1",
   "description": "Normalize and clean text",
-  "main": "index.js",
+  "main": "lib/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/superscriptjs/normalizer"
+  },
   "scripts": {
-    "test": "mocha test/basic.js -R spec -t 4000"
+    "build": "babel src --presets babel-preset-es2015 --out-dir lib",
+    "prepublish": "npm run build",
+    "test": "mocha --compilers js:babel-register test -R spec -t 4000",
+    "test-travis": "./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha -- --compilers js:babel-register -R spec test -s 1700 -t 4000"
   },
   "author": "Rob Ellis",
   "license": "MIT",
   "dependencies": {
-    "async": "~0.7.0",
-    "debug": "~0.8.0",
-    "re2": "^1.3.0",
-    "string": "~1.8.0"
+    "debug": "^2.2.0",
+    "re2": "^1.3.3",
+    "string": "^3.3.3"
   },
   "devDependencies": {
-    "mocha": "~1.18.2",
-    "should": "~3.3.1"
+    "babel-cli": "^6.16.0",
+    "babel-preset-es2015": "^6.16.0",
+    "babel-register": "^6.18.0",
+    "coveralls": "^2.11.14",
+    "eslint": "^3.8.1",
+    "eslint-config-airbnb": "^12.0.0",
+    "eslint-plugin-import": "^1.16.0",
+    "eslint-plugin-jsx-a11y": "^2.2.3",
+    "eslint-plugin-react": "^6.4.1",
+    "istanbul": "^0.4.5",
+    "mocha": "^3.1.2",
+    "should": "^11.1.1"
   }
 }

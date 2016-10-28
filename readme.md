@@ -4,7 +4,15 @@
 
 The simple app processes input and tries to make it consumable for a bot.
 
-The order in which the processing happes is important.
+A single method `clean(message)` is exposed.
+
+```
+import normalizer from node-normalizer;
+// const normalizer = require('node-normalizer').default;
+const cleanedMessage = normalizer.clean('my message');
+```
+
+The order in which the processing happens is important.
 
 * <xxx means sentence start then xxx
 * 1. spelling corrections for common spelling errors

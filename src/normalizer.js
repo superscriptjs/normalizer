@@ -1,6 +1,5 @@
 import fs from 'fs';
 import path from 'path';
-import str from 'string';
 import RE2 from 're2';
 import debuglog from 'debug';
 
@@ -103,13 +102,14 @@ const doTask = function doTask(task) {
 
   for (let i = 0; i < data.length; i++) {
     const line = data[i];
-    let nline = str(line).trimLeft();
+    let nline = line.trimLeft();
+    // let nline = str(line).trimLeft();
 
     // Let's allow comments with '#'
     const pos = nline.indexOf('#');
 
     if (pos === -1) {
-      const parts = nline.s.split(' ');
+      const parts = nline.split(' ');
 
       if (parts[1] === undefined) {
         lineHandle(task, parts[0], '');
@@ -117,8 +117,8 @@ const doTask = function doTask(task) {
         lineHandle(task, parts[0], parts[1]);
       }
     } else if (pos > 0) {
-      nline = nline.left(pos);
-      const parts = nline.s.split(' ');
+      nline = nline.substr(0, pos);
+      const parts = nline.split(' ');
       lineHandle(task, parts[0], parts[1]);
     }
   }

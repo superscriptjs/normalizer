@@ -61,12 +61,6 @@ const lineHandle = function lineHandle(task, phrase, replacement = '') {
   phrase.split(' ').forEach((word) => {
     word = word.toLowerCase();
 
-    // TODO: Fuck me, am I right? Should.js won't let you do:
-    // replacements['should'] = [];
-    if (word === 'should') {
-      return;
-    }
-
     if (replacements[word] === undefined) {
       replacements[word] = [];
     }
@@ -151,9 +145,6 @@ const clean = function clean(msg) {
   splitMsg = splitMsg.split(' ');
 
   splitMsg.forEach((word) => {
-    if (word === 'should') {
-      return;
-    }
 
     if (replacements[word]) {
       replacements[word].forEach((phrase) => {

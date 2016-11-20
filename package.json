@@ -1,6 +1,6 @@
 {
   "name": "node-normalizer",
-  "version": "1.0.0-alpha3",
+  "version": "1.0.0-alpha4",
   "description": "Normalize and clean text",
   "main": "lib/normalizer.js",
   "repository": {

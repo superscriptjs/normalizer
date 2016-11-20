@@ -29,56 +29,76 @@ const tasks = [
   { key: '_texting', file: 'texting.txt' },
 ];
 
-const reSet = {};
-
 const quotemeta = function quotemeta(string) {
   const unsafe = '\\.+*?[^]$(){}=!<>|:';
+  let cleanString = string;
   for (let i = 0; i < unsafe.length; i++) {
-    string = string.replace(new RegExp(`\\${unsafe.charAt(i)}`, 'g'), `\\${unsafe.charAt(i)}`);
+    cleanString = cleanString.replace(new RegExp(`\\${unsafe.charAt(i)}`, 'g'), `\\${unsafe.charAt(i)}`);
   }
-  return string;
+  return cleanString;
 };
 
-const lineHandle = function lineHandle(task, key, replacer) {
-  if (reSet[task.key] === undefined) {
-    reSet[task.key] = {};
+const replacements = {};
+const systemReplacements = [];
+
+const lineHandle = function lineHandle(task, phrase, replacement = '') {
+  let start = false;
+  let end = false;
+
+  if (phrase[0] === '<') {
+    start = true;
+    phrase = phrase.substring(1);
   }
 
-  if (reSet[task.key][key] === undefined) {
-    reSet[task.key][key] = [];
+  if (phrase.slice(-1) === '>') {
+    end = true;
+    phrase = phrase.substring(0, phrase.length - 1);
   }
 
-  // Add RegEx
-  let startM = false;
-  let endM = false;
-  let lookup = key;
+  phrase = re11.replace(phrase, ' ');
+  const cleanPhrase = quotemeta(phrase);
 
-  if (key[0] === '<') {
-    startM = true;
-    lookup = key.substring(1);
-  }
+  phrase.split(' ').forEach((word) => {
+    word = word.toLowerCase();
 
-  if (key.slice(-1) === '>') {
-    endM = true;
-    lookup = lookup.substring(0, lookup.length - 1);
-  }
-
-  const qm = quotemeta(re11.replace(lookup, ' '));
-
-  if (startM && endM) {
-    reSet[task.key][key].push({ re: new RegExp(`^${qm}$`, 'gi'), r: replacer });
-  } else if (startM) {
-    reSet[task.key][key].push({ re: new RegExp(`^${qm}(\\W+|$)`, 'gi'), r: `${replacer}$1` });
-  } else if (endM) {
-    reSet[task.key][key].push({ re: new RegExp(`(\\W+|^)${qm}$`, 'gi'), r: `$1${replacer}` });
-    if (task.key === '_sys') {
-      reSet[task.key][key].push({ re: new RegExp(`${qm}$`, 'gi'), r: replacer });
-    } else {
-      // reSet[task.key][key].push({ re: new RegExp(`(\\W+)${qm}(\\W+)`, 'gi'), r: `$1${replacer}$2` });
+    // TODO: Fuck me, am I right? Should.js won't let you do:
+    // replacements['should'] = [];
+    if (word === 'should') {
+      return;
     }
-  } else {
-    reSet[task.key][key].push({ re: new RegExp(`(\\W+|^)${qm}(\\W+|$)`, 'gi'), r: `$1${replacer}$2` });
-  }
+
+    if (replacements[word] === undefined) {
+      replacements[word] = [];
+    }
+
+    let phraseRegex;
+    let replacementRegex;
+
+    if (start && end) {
+      phraseRegex = new RegExp(`^${cleanPhrase}$`, 'gi');
+      replacementRegex = replacement;
+    } else if (start) {
+      phraseRegex = new RegExp(`^${cleanPhrase}(\\W+|$)`, 'gi');
+      replacementRegex = `${replacement}$1`;
+    } else if (end) {
+      phraseRegex = new RegExp(`(\\W+|^)${cleanPhrase}$`, 'gi');
+      replacementRegex = `$1${replacement}`;
+      if (task.key === '_sys') {
+        phraseRegex = new RegExp(`${cleanPhrase}$`, 'i');
+        replacementRegex = replacement;
+      }
+    } else {
+      phraseRegex = new RegExp(`(\\W+|^)${cleanPhrase}(\\W+|$)`, 'gi');
+      replacementRegex = `$1${replacement}$2`;
+    }
+
+    if (task.key === '_sys') {
+      systemReplacements.push({ phraseRegex, replacementRegex });
+    } else {
+      replacements[word].push({ phrase, replacement, phraseRegex, replacementRegex });
+      replacements[word].sort((a, b) => (b.phrase.split(' ').length - a.phrase.split(' ').length));
+    }
+  });
 };
 
 const doTask = function doTask(task) {
@@ -123,15 +143,24 @@ const clean = function clean(msg) {
   msg = re6.replace(msg, '—');
   msg = re7.replace(msg, '');
 
-  const replacer = (regex) => {
-    msg = msg.replace(regex.re, regex.r);
-  };
+  systemReplacements.forEach((replacement) => {
+    msg = msg.replace(replacement.phraseRegex, replacement.replacementRegex);
+  });
 
-  Object.keys(reSet).forEach((taskKey) => {
-    Object.keys(reSet[taskKey]).forEach((key) => {
-      const reArray = reSet[taskKey][key];
-      reArray.forEach(replacer);
-    });
+  let splitMsg = msg.toLowerCase();
+  splitMsg = splitMsg.split(' ');
+
+  splitMsg.forEach((word) => {
+    if (word === 'should') {
+      return;
+    }
+
+    if (replacements[word]) {
+      replacements[word].forEach((phrase) => {
+        // console.log(`Replacing "${phrase.phrase}" with "${phrase.replacement}"`);
+        msg = msg.replace(phrase.phraseRegex, phrase.replacementRegex);
+      });
+    }
   });
 
   msg = re8.replace(msg, ' ');

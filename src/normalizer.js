@@ -103,7 +103,6 @@ const doTask = function doTask(task) {
   for (let i = 0; i < data.length; i++) {
     const line = data[i];
     let nline = line.trimLeft();
-    // let nline = str(line).trimLeft();
 
     // Let's allow comments with '#'
     const pos = nline.indexOf('#');

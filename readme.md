@@ -1,3 +1,8 @@
+# Depreciation Notice
+This project has been re-imagined in 
+[https://github.com/bot-ai/bot-lang](https://github.com/bot-ai/bot-lang)
+
+
 # Normalize, clean and fix text
 
     npm install node-normalizer
